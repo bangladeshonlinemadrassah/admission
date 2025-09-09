@@ -1609,8 +1609,8 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       }
     }
 
-    // ডেটা নরমালাইজ (এখন timestamp থেকে সঠিক তারিখ/সময় নেয়)
-    function normalizeRow(row, index) {
+    // ডেটা নরমালাইজ (এখন timestamp থেকে সঠিক তারিখ/সময় নেয়, serial সরানো)
+    function normalizeRow(row) {
       return {
         subject: findBestMatchingSubject(row.subject || 'Unknown'),
         link: row.link || '#',
@@ -1618,16 +1618,25 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
         date: getDateFromTimestamp(row.timestamp),
         time: getTimeFromTimestamp(row.timestamp),
         timestampObj: parseTimestamp(row.timestamp), // Store parsed Date for sorting
-        serial: index + 1
+        // serial সরানো: পরে সাবজেক্ট অনুযায়ী হ্যান্ডেল করা হবে
       };
     }
 
-    // কার্ড রেন্ডার (প্লেসহোল্ডার)
+    // কার্ড রেন্ডার (প্রত্যেক সাবজেক্টের জন্য আলাদা সিরিয়াল)
     function renderCards(rows, root) {
       if (!rows || rows.length === 0) {
         root.innerHTML = '<div class="empty-state" style="text-align: center; padding: 40px;"><i class="fas fa-clock" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 15px;"></i><p class="bangla-font">কোন ক্লাস পাওয়া যায়নি</p></div>';
         return;
       }
+      
+      // প্রথমে rows কে timestamp অনুযায়ী desc সর্ট করুন (নতুন উপরে)
+      rows = sortByTime(rows, 'desc');
+      
+      // এখন সিরিয়াল অ্যাসাইন করুন: 1 থেকে শুরু (নতুন ক্লাস 1, পুরাতন শেষে)
+      rows.forEach((r, idx) => {
+        r.serial = idx + 1;  // সাবজেক্ট-স্পেসিফিক সিরিয়াল
+      });
+      
       root.innerHTML = '';
       rows.forEach(r => {
         const card = document.createElement('div');
@@ -1751,12 +1760,16 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       const sortSelect = $('#sort');
       grid.innerHTML = '<div class="card"><div class="subject bangla-font">লোড হচ্ছে... <span class="loading"></span></div></div>';
       let rows = allClasses.filter(r => r && r.subject === subject);
-      rows = sortByTime(rows, 'desc');
-      renderCards(rows, grid);
+      
+      // ডিফল্ট সর্ট: desc (নতুন উপরে)
+      let sortedRows = sortByTime(rows, 'desc');
+      renderCards(sortedRows, grid);  // এখানে renderCards সর্টেড rows পাবে
+      
       searchInput.addEventListener('input', () => {
         const q = searchInput.value.toLowerCase();
         const filtered = rows.filter(r => (r.subject || '').toLowerCase().includes(q) || (r.title || '').toLowerCase().includes(q));
-        renderCards(filtered, grid);
+        const sortedFiltered = sortByTime(filtered, sortSelect.value);  // সর্ট অর্ডার অনুসারে
+        renderCards(sortedFiltered, grid);
       });
       sortSelect.addEventListener('change', () => {
         const order = sortSelect.value;
@@ -1796,7 +1809,7 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
     async function loadInitialData() {
       try {
         const data = await fetchData();
-        allClasses = data.map((row, index) => normalizeRow(row, index)).filter(r => r);
+        allClasses = data.map((row) => normalizeRow(row)).filter(r => r);  // index সরানো
         renderTodayClassesSummary(allClasses);
         setupEventListeners();
       } catch (error) {
