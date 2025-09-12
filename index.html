@@ -42,23 +42,23 @@
     }
 
     /* স্ক্রলিং মসৃণ করার জন্য */
-html {
-  scroll-behavior: smooth; /* স্ক্রল মসৃণ করবে */
-  -webkit-overflow-scrolling: touch; /* মোবাইলে স্মুথ স্ক্রল */
-}
+    html {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
 
-body, header, .card, .hero, .pill, .stat-card {
-  will-change: transform; /* ব্রাউজারকে দ্রুত রেন্ডার করতে বলে */
-  transform: translateZ(0); /* হার্ডওয়্যার ত্বরণ (GPU) ব্যবহার করে */
-}
+    body, header, .card, .hero, .pill, .stat-card {
+      will-change: transform;
+      transform: translateZ(0);
+    }
 
-header, .card, .hero, .login-container, .modal-content {
-  backdrop-filter: blur(8px); /* ব্লার কমিয়ে স্ক্রল দ্রুত করা */
-}
+    header, .card, .hero, .login-container, .modal-content {
+      backdrop-filter: blur(8px);
+    }
 
-.card, .btn, .pill, .stat-card {
-  transition: transform 0.2s, box-shadow 0.2s; /* অ্যানিমেশন সিম্পল করা */
-}
+    .card, .btn, .pill, .stat-card {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
     /* =========================
     BASE STYLES - ENHANCED
@@ -858,88 +858,87 @@ header, .card, .hero, .login-container, .modal-content {
     }
 
     /* =========================
-WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
-========================= */
-.warning-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  z-index: 2000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-  backdrop-filter: blur(10px);
-}
+    WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
+    ========================= */
+    .warning-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      backdrop-filter: blur(10px);
+    }
 
-.warning-modal.show {
-  opacity: 1;
-  visibility: visible;
-}
+    .warning-modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
 
-.modal-content {
-  background: var(--card-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  padding: 35px;
-  max-width: 500px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  /* No extra padding or margin - pure center floating */
-}
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 35px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
 
-.modal-content::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
-  transform: rotate(30deg);
-  pointer-events: none;
-}
+    .modal-content::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+      transform: rotate(30deg);
+      pointer-events: none;
+    }
 
-.modal-header h2 {
-  font-size: 1.6rem;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 15px;
-  font-weight: 800;
-}
+    .modal-header h2 {
+      font-size: 1.6rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
 
-.modal-body p {
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 18px;
-}
+    .modal-body p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
 
-.modal-footer .modal-ok-btn {
-  padding: 14px 35px;
-  border-radius: 12px;
-  border: none;
-  background: var(--gradient-primary);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: var(--shadow-md);
-}
+    .modal-footer .modal-ok-btn {
+      padding: 14px 35px;
+      border-radius: 12px;
+      border: none;
+      background: var(--gradient-primary);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-md);
+    }
 
-.modal-ok-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+    .modal-ok-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
     }
 
     /* =========================
@@ -1189,16 +1188,16 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
 
     /* ক্লাস কার্ডের পারফেক্ট সাইজ */
     #classGrid .card {
-      min-height: 220px; /* Changed: Increased min-height for taller cards */
-      height: auto; /* Changed: Allow dynamic height to fit content */
+      min-height: 220px;
+      height: auto;
       max-width: 300px;
       width: 300px;
       margin: 0 auto;
-      padding: 25px; /* Changed: Increased padding for better spacing */
+      padding: 25px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 12px; /* Changed: Slightly increased gap for better content spacing */
+      gap: 12px;
     }
 
     #classGrid .card .subject {
@@ -1305,6 +1304,12 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
           <div class="stat-number">130+</div>
           <div class="stat-label bangla-font">মিশন</div>
         </div>
+      </div>
+      <!-- রিফ্রেশ বোতাম -->
+      <div style="text-align: center; margin: 20px 0;">
+        <button class="btn bangla-font refresh-btn" onclick="refreshData()">
+          <i class="fas fa-sync"></i> <span class="bangla-font">ডাটা রিফ্রেশ করুন</span>
+        </button>
       </div>
       <!-- আজকের ক্লাস সেকশন -->
       <div class="section-title">
@@ -1550,7 +1555,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
     // Timestamp থেকে তারিখ এবং সময় এক্সট্র্যাক্ট করার ফাংশন
     function parseTimestamp(timestampStr) {
       try {
-        // Parse the timestamp string to Date object
         const date = new Date(timestampStr);
         if (isNaN(date.getTime())) {
           throw new Error('Invalid date');
@@ -1558,7 +1562,7 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
         return date;
       } catch (error) {
         console.error('Timestamp parse error:', error);
-        return new Date(); // Fallback to current date if invalid
+        return new Date();
       }
     }
 
@@ -1594,7 +1598,7 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
 
     // ডেটা ফেচ করা (প্লেসহোল্ডার API URL, কাস্টমাইজেশন প্রয়োজন)
     async function fetchData() {
-      showNotification("ডেটা লোড হচ্ছে...", false);
+      showNotification("ডাটা লোড হচ্ছে...", false);
       try {
         const res = await fetch('https://script.google.com/macros/s/AKfycbzLWkqUJGkGNP5k3bCYM7mSbEbe6SVorTTQu-NpWa4VB2ZSpY_4N4VbIoxcW5EGSPHW3A/exec', {
           method: 'GET',
@@ -1604,7 +1608,7 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
         const data = await res.json();
         return data.ok ? data.rows || [] : [];
       } catch (error) {
-        showNotification("ডেটা লোড করা যায়নি: " + error.message, true);
+        showNotification("ডাটা লোড করা যায়নি: " + error.message, true);
         return [];
       }
     }
@@ -1614,11 +1618,10 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       return {
         subject: findBestMatchingSubject(row.subject || 'Unknown'),
         link: row.link || '#',
-        title: row.title || 'ক্লাস', // Ensure title is always present
+        title: row.title || 'ক্লাস',
         date: getDateFromTimestamp(row.timestamp),
         time: getTimeFromTimestamp(row.timestamp),
-        timestampObj: parseTimestamp(row.timestamp), // Store parsed Date for sorting
-        // serial সরানো: পরে সাবজেক্ট অনুযায়ী হ্যান্ডেল করা হবে
+        timestampObj: parseTimestamp(row.timestamp),
       };
     }
 
@@ -1629,12 +1632,10 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
         return;
       }
       
-      // প্রথমে rows কে timestamp অনুযায়ী desc সর্ট করুন (নতুন উপরে)
       rows = sortByTime(rows, 'desc');
       
-      // এখন সিরিয়াল অ্যাসাইন করুন: 1 থেকে শুরু (নতুন ক্লাস 1, পুরাতন শেষে)
       rows.forEach((r, idx) => {
-        r.serial = idx + 1;  // সাবজেক্ট-স্পেসিফিক সিরিয়াল
+        r.serial = idx + 1;
       });
       
       root.innerHTML = '';
@@ -1642,7 +1643,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
         const card = document.createElement('div');
         card.className = 'card fade-in';
         
-        // ফোল্ডার অনুযায়ী বাটন টেক্সট সেট করা
         let buttonText = 'ক্লাস দেখুন';
         if (r.subject === 'ইক্সাম') {
           buttonText = 'পরীক্ষায় অংশগ্রহণ করুন';
@@ -1652,7 +1652,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
           buttonText = 'দেখুন';
         }
         
-        // Changed: Added class-title div to display the title
         card.innerHTML = `
           <span class="card-badge">#${r.serial}</span>
           <div class="subject"><i class="fas fa-book"></i> <span class="bangla-font">${r.subject}</span></div>
@@ -1661,14 +1660,13 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
           <a class="btn" href="${r.link}" target="_blank"><i class="fas fa-play-circle"></i> <span class="bangla-font">${buttonText}</span></a>
         `;
         root.appendChild(card);
-        // Ensure card is visible by adding 'visible' class after appending
         setTimeout(() => card.classList.add('visible'), 100);
       });
     }
 
     // আজকের ক্লাস ফিল্টার (মিশন সাব-সাবজেক্টগুলো অন্তর্ভুক্ত)
     function filterTodayClasses(classes) {
-      const today = getDateFromTimestamp(new Date().toString()); // Current date as string
+      const today = getDateFromTimestamp(new Date().toString());
       return classes.filter(cls => cls && cls.date === today);
     }
 
@@ -1761,14 +1759,13 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       grid.innerHTML = '<div class="card"><div class="subject bangla-font">লোড হচ্ছে... <span class="loading"></span></div></div>';
       let rows = allClasses.filter(r => r && r.subject === subject);
       
-      // ডিফল্ট সর্ট: desc (নতুন উপরে)
       let sortedRows = sortByTime(rows, 'desc');
-      renderCards(sortedRows, grid);  // এখানে renderCards সর্টেড rows পাবে
+      renderCards(sortedRows, grid);
       
       searchInput.addEventListener('input', () => {
         const q = searchInput.value.toLowerCase();
         const filtered = rows.filter(r => (r.subject || '').toLowerCase().includes(q) || (r.title || '').toLowerCase().includes(q));
-        const sortedFiltered = sortByTime(filtered, sortSelect.value);  // সর্ট অর্ডার অনুসারে
+        const sortedFiltered = sortByTime(filtered, sortSelect.value);
         renderCards(sortedFiltered, grid);
       });
       sortSelect.addEventListener('change', () => {
@@ -1809,11 +1806,25 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
     async function loadInitialData() {
       try {
         const data = await fetchData();
-        allClasses = data.map((row) => normalizeRow(row)).filter(r => r);  // index সরানো
+        allClasses = data.map((row) => normalizeRow(row)).filter(r => r);
         renderTodayClassesSummary(allClasses);
         setupEventListeners();
+        showNotification("ডাটা লোড সম্পন্ন হয়েছে!", false); // সফল মেসেজ যোগ
       } catch (error) {
-        showNotification("ডেটা লোড করতে সমস্যা হয়েছে", true);
+        showNotification("ডাটা লোড করতে সমস্যা হয়েছে", true);
+      }
+    }
+
+    // ডাটা রিফ্রেশ ফাংশন
+    async function refreshData() {
+      showNotification("ডাটা রিফ্রেশ হচ্ছে...", false);
+      try {
+        const data = await fetchData();
+        allClasses = data.map((row) => normalizeRow(row)).filter(r => r);
+        renderTodayClassesSummary(allClasses);
+        showNotification("ডাটা রিফ্রেশ সম্পন্ন হয়েছে!", false);
+      } catch (error) {
+        showNotification("ডাটা রিফ্রেশ করতে সমস্যা হয়েছে: " + error.message, true);
       }
     }
 
@@ -1834,7 +1845,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       }
       scrollToTop();
       
-      // Fade in animation for elements
       setTimeout(() => {
         document.querySelectorAll('.fade-in').forEach(el => {
           el.classList.add('visible');
@@ -1842,5 +1852,5 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       }, 100);
     });
   </script>
-  </body>
+</body>
 </html>
