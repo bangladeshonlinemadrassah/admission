@@ -982,6 +982,10 @@
       border-left: 5px solid var(--warning);
     }
 
+    .notification.info {
+      border-left: 5px solid var(--primary);
+    }
+
     /* =========================
     ANIMATIONS
     ========================= */
@@ -1238,6 +1242,48 @@
       align-items: center;
       gap: 8px;
     }
+
+    /* রিফ্রেশ বাটনের জন্য নতুন স্টাইল */
+    .refresh-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .refresh-btn.loading {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .refresh-btn .spinner {
+      display: none;
+      margin-right: 8px;
+      animation: spin 1s linear infinite;
+    }
+
+    .refresh-btn.loading .spinner {
+      display: inline-block;
+    }
+
+    .refresh-btn.loading .btn-text {
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* লোডিং স্টেট */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -1308,7 +1354,8 @@
       <!-- রিফ্রেশ বোতাম -->
       <div style="text-align: center; margin: 20px 0;">
         <button class="btn bangla-font refresh-btn" onclick="refreshData()">
-          <i class="fas fa-sync"></i> <span class="bangla-font">ডাটা রিফ্রেশ করুন</span>
+          <i class="fas fa-sync spinner"></i> 
+          <span class="btn-text bangla-font">ডাটা রিফ্রেশ করুন</span>
         </button>
       </div>
       <!-- আজকের ক্লাস সেকশন -->
@@ -1442,7 +1489,7 @@
       </div>
       <div class="modal-body">
         <p class="bangla-font">অনুগ্রহ করে নোট করুন:<br>BOM এর ওয়েবসাইটের এক্সেস তথ্য সর্বদা গোপনীয় রাখুন এবং কারোর সাথে পাসওয়ার্ড শেয়ার করবেন না।</p>
-        <p class="bangla-font">যদি কোনো ব্যবহারকারীর পাসওয়ার্ড শেয়ার করতে দেখা যায়, তাহলে তাকে এই ওয়েবসাইট থেকে স্থায়ীভাবে নিষিদ্ধ করা হবে।</p>
+        <p class="bangla-font">যদি কোনো ব্যবহারকারীর পাসওয়ার্ড শেয়ার করতে দেখা যায়, তাহলে তাকে এই ওয়েবসাইট থেকে স্থায়ীভাবে নিষিদ্ধ করা হবে。</p>
       </div>
       <div class="modal-footer">
         <button class="modal-ok-btn bangla-font" onclick="closeWarningModal()">ঠিক আছে</button>
@@ -1521,13 +1568,25 @@
       warningModal.classList.remove('show');
     }
 
-    // নোটিফিকেশন দেখানোর ফাংশন
-    function showNotification(message, isError = false, isWarning = false) {
+    // নোটিফিকেশন দেখানোর উন্নত ফাংশন
+    function showNotification(message, type = 'info') {
       const notification = $('#notification');
-      notification.innerHTML = `<i class="${isError ? 'fas fa-exclamation-circle' : isWarning ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle'}"></i> ${message}`;
-      notification.className = 'notification ' + (isError ? 'error' : isWarning ? 'warning' : 'success');
+      notification.innerHTML = `
+        <i class="${type === 'error' ? 'fas fa-exclamation-circle' : 
+                   type === 'warning' ? 'fas fa-exclamation-triangle' : 
+                   type === 'success' ? 'fas fa-check-circle' : 
+                   'fas fa-info-circle'}"></i> 
+        <span class="bangla-font">${message}</span>
+      `;
+      
+      notification.className = 'notification ' + type;
       notification.classList.add('show');
-      setTimeout(() => notification.classList.remove('show'), 3000);
+      
+      // স্বয়ংক্রিয়ভাবে লুকানোর সময় নির্ধারণ
+      const duration = type === 'error' ? 5000 : 3000;
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, duration);
     }
 
     // পাসওয়ার্ড চেক করার ফাংশন
@@ -1596,19 +1655,33 @@
       return availableSubjects.includes(subjectFromSheet) ? subjectFromSheet : subjectFromSheet;
     }
 
-    // ডেটা ফেচ করা (প্লেসহোল্ডার API URL, কাস্টমাইজেশন প্রয়োজন)
+    // ডেটা ফেচ করার উন্নত ফাংশন
     async function fetchData() {
-      showNotification("ডাটা লোড হচ্ছে...", false);
+      showNotification("ডাটা লোড হচ্ছে...", 'info');
+      
       try {
+        // রিফ্রেশ বাটনে লোডিং স্টেট সেট করুন
+        const refreshBtn = $('.refresh-btn');
+        if (refreshBtn) refreshBtn.classList.add('loading');
+        
         const res = await fetch('https://script.google.com/macros/s/AKfycbzLWkqUJGkGNP5k3bCYM7mSbEbe6SVorTTQu-NpWa4VB2ZSpY_4N4VbIoxcW5EGSPHW3A/exec', {
           method: 'GET',
           headers: { 'Accept': 'application/json' }
         });
+        
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
+        
+        // রিফ্রেশ বাটনের লোডিং স্টেট সরান
+        if (refreshBtn) refreshBtn.classList.remove('loading');
+        
         return data.ok ? data.rows || [] : [];
       } catch (error) {
-        showNotification("ডাটা লোড করা যায়নি: " + error.message, true);
+        // রিফ্রেশ বাটনের লোডিং স্টেট সরান
+        const refreshBtn = $('.refresh-btn');
+        if (refreshBtn) refreshBtn.classList.remove('loading');
+        
+        showNotification("ডাটা লোড করা যায়নি: " + error.message, 'error');
         return [];
       }
     }
@@ -1809,22 +1882,29 @@
         allClasses = data.map((row) => normalizeRow(row)).filter(r => r);
         renderTodayClassesSummary(allClasses);
         setupEventListeners();
-        showNotification("ডাটা লোড সম্পন্ন হয়েছে!", false); // সফল মেসেজ যোগ
+        showNotification("ডাটা লোড সম্পন্ন হয়েছে!", 'success');
       } catch (error) {
-        showNotification("ডাটা লোড করতে সমস্যা হয়েছে", true);
+        showNotification("ডাটা লোড করতে সমস্যা হয়েছে", 'error');
       }
     }
 
-    // ডাটা রিফ্রেশ ফাংশন
+    // ডাটা রিফ্রেশ ফাংশন উন্নত করা
     async function refreshData() {
-      showNotification("ডাটা রিফ্রেশ হচ্ছে...", false);
+      showNotification("ডাটা রিফ্রেশ হচ্ছে...", 'info');
+      
       try {
         const data = await fetchData();
         allClasses = data.map((row) => normalizeRow(row)).filter(r => r);
         renderTodayClassesSummary(allClasses);
-        showNotification("ডাটা রিফ্রেশ সম্পন্ন হয়েছে!", false);
+        
+        // যদি বর্তমানে কোনো সাবজেক্ট পেজ খোলা থাকে, সেটিও আপডেট করুন
+        if (currentSubject && subjectPage.style.display !== 'none') {
+          loadSubjectData(currentSubject);
+        }
+        
+        showNotification("ডাটা রিফ্রেশ সম্পন্ন হয়েছে!", 'success');
       } catch (error) {
-        showNotification("ডাটা রিফ্রেশ করতে সমস্যা হয়েছে: " + error.message, true);
+        showNotification("ডাটা রিফ্রেশ করতে সমস্যা হয়েছে: " + error.message, 'error');
       }
     }
 
