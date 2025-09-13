@@ -42,23 +42,23 @@
     }
 
     /* স্ক্রলিং মসৃণ করার জন্য */
-    html {
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
+html {
+  scroll-behavior: smooth; /* স্ক্রল মসৃণ করবে */
+  -webkit-overflow-scrolling: touch; /* মোবাইলে স্মুথ স্ক্রল */
+}
 
-    body, header, .card, .hero, .pill, .stat-card {
-      will-change: transform;
-      transform: translateZ(0);
-    }
+body, header, .card, .hero, .pill, .stat-card {
+  will-change: transform; /* ব্রাউজারকে দ্রুত রেন্ডার করতে বলে */
+  transform: translateZ(0); /* হার্ডওয়্যার ত্বরণ (GPU) ব্যবহার করে */
+}
 
-    header, .card, .hero, .login-container, .modal-content {
-      backdrop-filter: blur(8px);
-    }
+header, .card, .hero, .login-container, .modal-content {
+  backdrop-filter: blur(8px); /* ব্লার কমিয়ে স্ক্রল দ্রুত করা */
+}
 
-    .card, .btn, .pill, .stat-card {
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+.card, .btn, .pill, .stat-card {
+  transition: transform 0.2s, box-shadow 0.2s; /* অ্যানিমেশন সিম্পল করা */
+}
 
     /* =========================
     BASE STYLES - ENHANCED
@@ -858,87 +858,88 @@
     }
 
     /* =========================
-    WARNING MODAL - FLOATING POPUP CENTER
-    ========================= */
-    .warning-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s, visibility 0.3s;
-      backdrop-filter: blur(10px);
-    }
+WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
+========================= */
+.warning-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  backdrop-filter: blur(10px);
+}
 
-    .warning-modal.show {
-      opacity: 1;
-      visibility: visible;
-    }
+.warning-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
 
-    .modal-content {
-      background: var(--card-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      padding: 35px;
-      max-width: 500px;
-      width: 90%;
-      max-height: 80vh;
-      overflow-y: auto;
-      backdrop-filter: blur(20px);
-      box-shadow: var(--shadow-lg);
-      position: relative;
-    }
+.modal-content {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 35px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  /* No extra padding or margin - pure center floating */
+}
 
-    .modal-content::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
-      transform: rotate(30deg);
-      pointer-events: none;
-    }
+.modal-content::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(30deg);
+  pointer-events: none;
+}
 
-    .modal-header h2 {
-      font-size: 1.6rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 15px;
-      font-weight: 800;
-    }
+.modal-header h2 {
+  font-size: 1.6rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
 
-    .modal-body p {
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 18px;
-    }
+.modal-body p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
 
-    .modal-footer .modal-ok-btn {
-      padding: 14px 35px;
-      border-radius: 12px;
-      border: none;
-      background: var(--gradient-primary);
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: var(--shadow-md);
-    }
+.modal-footer .modal-ok-btn {
+  padding: 14px 35px;
+  border-radius: 12px;
+  border: none;
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-md);
+}
 
-    .modal-ok-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+.modal-ok-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
     }
 
     /* =========================
@@ -946,24 +947,23 @@
     ========================= */
     .notification {
       position: fixed;
-      bottom: 40px;
-      right: 40px;
-      padding: 20px 30px;
+      bottom: 30px;
+      right: 30px;
+      padding: 18px 25px;
       background: var(--card-bg);
-      border: 2px solid var(--glass-border);
+      border: 1px solid var(--glass-border);
       border-radius: 12px;
       box-shadow: var(--shadow-lg);
       z-index: 1000;
       opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s;
       backdrop-filter: blur(20px);
       display: flex;
       align-items: center;
       gap: 12px;
-      max-width: 400px;
-      font-size: 1rem;
-      color: var(--text);
+      max-width: 350px;
+      font-size: 0.95rem;
     }
 
     .notification.show {
@@ -972,99 +972,15 @@
     }
 
     .notification.error {
-      border-left: 6px solid var(--danger);
-      background: rgba(239, 71, 111, 0.1);
+      border-left: 5px solid var(--danger);
     }
 
     .notification.success {
-      border-left: 6px solid var(--secondary);
-      background: rgba(6, 214, 160, 0.1);
+      border-left: 5px solid var(--secondary);
     }
 
     .notification.warning {
-      border-left: 6px solid var(--warning);
-      background: rgba(255, 209, 102, 0.1);
-    }
-
-    .notification.info {
-      border-left: 6px solid var(--primary);
-      background: rgba(67, 97, 238, 0.1);
-    }
-
-    .notification i {
-      font-size: 1.2rem;
-    }
-
-    /* =========================
-    REFRESH BUTTON - REDESIGNED
-    ========================= */
-    .refresh-btn {
-      position: relative;
-      padding: 12px 24px;
-      background: var(--gradient-primary);
-      border-radius: 12px;
-      border: none;
-      color: white;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: var(--shadow-md);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .refresh-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
-    }
-
-    .refresh-btn.loading {
-      pointer-events: none;
-      background: var(--gradient-primary);
-      opacity: 0.85;
-    }
-
-    .refresh-btn .spinner {
-      display: none;
-      width: 18px;
-      height: 18px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    .refresh-btn.loading .spinner {
-      display: inline-block;
-    }
-
-    .refresh-btn.loading .btn-text {
-      opacity: 0;
-      transform: translateX(10px);
-      transition: opacity 0.3s, transform 0.3s;
-    }
-
-    .refresh-btn .loading-bar {
-      display: none;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--primary-light);
-      animation: loadingBar 2s linear infinite;
-    }
-
-    .refresh-btn.loading .loading-bar {
-      display: block;
-    }
-
-    @keyframes loadingBar {
-      0% { transform: scaleX(0); transform-origin: left; }
-      50% { transform: scaleX(1); transform-origin: left; }
-      100% { transform: scaleX(0); transform-origin: right; }
+      border-left: 5px solid var(--warning);
     }
 
     /* =========================
@@ -1084,11 +1000,6 @@
     .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
 
     /* =========================
@@ -1146,12 +1057,6 @@
       .owner-wrap {
         padding: 25px 20px;
       }
-
-      .notification {
-        bottom: 20px;
-        right: 20px;
-        max-width: 90%;
-      }
     }
 
     @media (max-width: 480px) {
@@ -1174,18 +1079,13 @@
       .stat-number {
         font-size: 2.8rem;
       }
-
-      .notification {
-        bottom: 15px;
-        right: 15px;
-        padding: 15px 20px;
-        font-size: 0.9rem;
-      }
     }
 
     /* =========================
     CUSTOM STYLES FOR CORRECTIONS
     ========================= */
+    
+    /* সর্ট অপশনের জন্য সাদা কালার */
     #sort {
       background: var(--glass);
       color: var(--text);
@@ -1195,18 +1095,20 @@
       font-size: 0.9rem;
       backdrop-filter: blur(10px);
     }
-
+    
     #sort option {
       background: var(--card-bg);
       color: var(--text);
     }
-
+    
+    /* ছোট ঘড়ির আইকন */
     .empty-state .fas.fa-clock {
       font-size: 2rem;
       color: var(--text-muted);
       margin-bottom: 15px;
     }
-
+    
+    /* ফিল্টার বার স্টাইল */
     .filter-bar {
       display: flex;
       flex-direction: column;
@@ -1266,6 +1168,7 @@
       box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3), var(--shadow-sm);
     }
 
+    /* ব্যাক বোতামের স্টাইল */
     .back-button {
       padding: 10px 20px;
       border-radius: 12px;
@@ -1284,17 +1187,18 @@
       box-shadow: var(--shadow-md);
     }
 
+    /* ক্লাস কার্ডের পারফেক্ট সাইজ */
     #classGrid .card {
-      min-height: 220px;
-      height: auto;
+      min-height: 220px; /* Changed: Increased min-height for taller cards */
+      height: auto; /* Changed: Allow dynamic height to fit content */
       max-width: 300px;
       width: 300px;
       margin: 0 auto;
-      padding: 25px;
+      padding: 25px; /* Changed: Increased padding for better spacing */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 12px;
+      gap: 12px; /* Changed: Slightly increased gap for better content spacing */
     }
 
     #classGrid .card .subject {
@@ -1324,6 +1228,7 @@
       border: 1px solid var(--glass-border);
     }
 
+    /* New: Style for class title in cards */
     #classGrid .card .class-title {
       font-size: 0.95rem;
       color: var(--text);
@@ -1400,14 +1305,6 @@
           <div class="stat-number">130+</div>
           <div class="stat-label bangla-font">মিশন</div>
         </div>
-      </div>
-      <!-- রিফ্রেশ বোতাম -->
-      <div style="text-align: center; margin: 20px 0;">
-        <button class="refresh-btn bangla-font" onclick="refreshData()">
-          <i class="fas fa-sync spinner"></i> 
-          <span class="btn-text">ডাটা রিফ্রেশ করুন</span>
-          <div class="loading-bar"></div>
-        </button>
       </div>
       <!-- আজকের ক্লাস সেকশন -->
       <div class="section-title">
@@ -1499,10 +1396,10 @@
     </div>
     <!-- FOOTER -->
     <footer class="site-footer">
-      © 2025 ALIM-25 BOM Admission Course 1.0 (BOM). All rights reserved.
+      © 2025 ALIM25 BOM Admission Course 1.0 (BOM). All rights reserved.
     </footer>
   </div>
-  <!-- মিশন সাব-সাবজেক্ট পেজ -->
+  <!-- মিশন সাব-সাবজেক্ট পেজ (নতুন যোগ করা) -->
   <div id="mission-subjects-page" style="display: none;">
     <header>
       <nav class="nav container">
@@ -1511,7 +1408,9 @@
     </header>
     <main class="container">
       <h2 id="mission-title" class="bangla-font"><i class="fas fa-bullseye"></i> মিশন</h2>
-      <div class="subj-list" id="mission-subjects-list"></div>
+      <div class="subj-list" id="mission-subjects-list">
+        <!-- JS দিয়ে রেন্ডার হবে -->
+      </div>
     </main>
     <!-- OWNER & DESIGNER BLOCK -->
     <div class="owner-wrap">
@@ -1560,7 +1459,7 @@
     const warningModal = $('#warning-modal');
     let allClasses = [];
 
-    // সাবজেক্টের তালিকা
+    // সাবজেক্টের তালিকা (মিশন এখানে আছে, কিন্তু সাব-সাবজেক্ট আলাদা)
     const availableSubjects = ["বাংলা", "ইংরেজি", "জি.কে", "Solve ক্লাস", "ইক্সাম", "মিশন", "রেজাল্ট", "উত্তরপত্র ও শীট", "অন্যান্য"];
 
     // মিশনের সাব-সাবজেক্টগুলো
@@ -1605,13 +1504,11 @@
       mainPage.style.display = 'none';
       subjectPage.style.display = 'none';
       missionSubjectsPage.style.display = 'none';
-      showNotification("আপনি লগআউট করেছেন।", 'info');
     }
 
     // ওয়ার্নিং মোডাল দেখানোর ফাংশন
     function showWarningModal() {
       warningModal.classList.add('show');
-      showNotification("লগইন সফল হয়েছে! ওয়েবসাইটে স্বাগতম!", 'success');
     }
 
     // ওয়ার্নিং মোডাল বন্ধ করার ফাংশন
@@ -1620,22 +1517,12 @@
     }
 
     // নোটিফিকেশন দেখানোর ফাংশন
-    function showNotification(message, type = 'info') {
+    function showNotification(message, isError = false, isWarning = false) {
       const notification = $('#notification');
-      notification.innerHTML = `
-        <i class="${type === 'error' ? 'fas fa-exclamation-circle' : 
-                   type === 'warning' ? 'fas fa-exclamation-triangle' : 
-                   type === 'success' ? 'fas fa-check-circle' : 
-                   'fas fa-info-circle'}"></i> 
-        <span class="bangla-font">${message}</span>
-      `;
-      notification.className = `notification ${type} show`;
-      
-      // স্বয়ংক্রিয়ভাবে লুকানোর সময়
-      const duration = type === 'error' ? 6000 : 4000;
-      setTimeout(() => {
-        notification.classList.remove('show');
-      }, duration);
+      notification.innerHTML = `<i class="${isError ? 'fas fa-exclamation-circle' : isWarning ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle'}"></i> ${message}`;
+      notification.className = 'notification ' + (isError ? 'error' : isWarning ? 'warning' : 'success');
+      notification.classList.add('show');
+      setTimeout(() => notification.classList.remove('show'), 3000);
     }
 
     // পাসওয়ার্ড চেক করার ফাংশন
@@ -1651,7 +1538,6 @@
         scrollToTop();
       } else {
         errorElement.style.display = 'block';
-        showNotification("সিকিউরিটি কোড ভুল হয়েছে।", 'error');
         setTimeout(() => errorElement.style.display = 'none', 3000);
       }
     }
@@ -1664,6 +1550,7 @@
     // Timestamp থেকে তারিখ এবং সময় এক্সট্র্যাক্ট করার ফাংশন
     function parseTimestamp(timestampStr) {
       try {
+        // Parse the timestamp string to Date object
         const date = new Date(timestampStr);
         if (isNaN(date.getTime())) {
           throw new Error('Invalid date');
@@ -1671,8 +1558,7 @@
         return date;
       } catch (error) {
         console.error('Timestamp parse error:', error);
-        showNotification("তারিখ পার্স করতে সমস্যা হয়েছে।", 'error');
-        return new Date();
+        return new Date(); // Fallback to current date if invalid
       }
     }
 
@@ -1698,7 +1584,7 @@
       return `${parseInt(day)} ${banglaMonths[parseInt(month) - 1]}, ${year}`;
     }
 
-    // সাবজেক্ট ম্যাচিং
+    // সাবজেক্ট ম্যাচিং (মিশনের সাব-সাবজেক্টগুলো চেক করে)
     function findBestMatchingSubject(subjectFromSheet) {
       if (missionSubSubjects.includes(subjectFromSheet)) {
         return subjectFromSheet;
@@ -1706,53 +1592,49 @@
       return availableSubjects.includes(subjectFromSheet) ? subjectFromSheet : subjectFromSheet;
     }
 
-    // ডেটা ফেচ করার ফাংশন
+    // ডেটা ফেচ করা (প্লেসহোল্ডার API URL, কাস্টমাইজেশন প্রয়োজন)
     async function fetchData() {
-      showNotification("ডাটা লোড হচ্ছে...", 'info');
-      const refreshBtn = $('.refresh-btn');
-      refreshBtn.classList.add('loading');
-      
+      showNotification("ডেটা লোড হচ্ছে...", false);
       try {
         const res = await fetch('https://script.google.com/macros/s/AKfycbzLWkqUJGkGNP5k3bCYM7mSbEbe6SVorTTQu-NpWa4VB2ZSpY_4N4VbIoxcW5EGSPHW3A/exec', {
           method: 'GET',
           headers: { 'Accept': 'application/json' }
         });
-        
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
-        refreshBtn.classList.remove('loading');
-        showNotification("ডাটা লোড সম্পন্ন হয়েছে!", 'success');
         return data.ok ? data.rows || [] : [];
       } catch (error) {
-        refreshBtn.classList.remove('loading');
-        showNotification("ডাটা লোড করতে সমস্যা: " + error.message, 'error');
+        showNotification("ডেটা লোড করা যায়নি: " + error.message, true);
         return [];
       }
     }
 
-    // ডেটা নরমালাইজ
+    // ডেটা নরমালাইজ (এখন timestamp থেকে সঠিক তারিখ/সময় নেয়, serial সরানো)
     function normalizeRow(row) {
       return {
         subject: findBestMatchingSubject(row.subject || 'Unknown'),
         link: row.link || '#',
-        title: row.title || 'ক্লাস',
+        title: row.title || 'ক্লাস', // Ensure title is always present
         date: getDateFromTimestamp(row.timestamp),
         time: getTimeFromTimestamp(row.timestamp),
-        timestampObj: parseTimestamp(row.timestamp),
+        timestampObj: parseTimestamp(row.timestamp), // Store parsed Date for sorting
+        // serial সরানো: পরে সাবজেক্ট অনুযায়ী হ্যান্ডেল করা হবে
       };
     }
 
-    // কার্ড রেন্ডার
+    // কার্ড রেন্ডার (প্রত্যেক সাবজেক্টের জন্য আলাদা সিরিয়াল)
     function renderCards(rows, root) {
       if (!rows || rows.length === 0) {
-        root.innerHTML = '<div class="empty-state" style="text-align: center; padding: 40px;"><i class="fas fa-clock"></i><p class="bangla-font">কোন ক্লাস পাওয়া যায়নি</p></div>';
+        root.innerHTML = '<div class="empty-state" style="text-align: center; padding: 40px;"><i class="fas fa-clock" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 15px;"></i><p class="bangla-font">কোন ক্লাস পাওয়া যায়নি</p></div>';
         return;
       }
       
+      // প্রথমে rows কে timestamp অনুযায়ী desc সর্ট করুন (নতুন উপরে)
       rows = sortByTime(rows, 'desc');
       
+      // এখন সিরিয়াল অ্যাসাইন করুন: 1 থেকে শুরু (নতুন ক্লাস 1, পুরাতন শেষে)
       rows.forEach((r, idx) => {
-        r.serial = idx + 1;
+        r.serial = idx + 1;  // সাবজেক্ট-স্পেসিফিক সিরিয়াল
       });
       
       root.innerHTML = '';
@@ -1760,6 +1642,7 @@
         const card = document.createElement('div');
         card.className = 'card fade-in';
         
+        // ফোল্ডার অনুযায়ী বাটন টেক্সট সেট করা
         let buttonText = 'ক্লাস দেখুন';
         if (r.subject === 'ইক্সাম') {
           buttonText = 'পরীক্ষায় অংশগ্রহণ করুন';
@@ -1769,6 +1652,7 @@
           buttonText = 'দেখুন';
         }
         
+        // Changed: Added class-title div to display the title
         card.innerHTML = `
           <span class="card-badge">#${r.serial}</span>
           <div class="subject"><i class="fas fa-book"></i> <span class="bangla-font">${r.subject}</span></div>
@@ -1777,13 +1661,14 @@
           <a class="btn" href="${r.link}" target="_blank"><i class="fas fa-play-circle"></i> <span class="bangla-font">${buttonText}</span></a>
         `;
         root.appendChild(card);
+        // Ensure card is visible by adding 'visible' class after appending
         setTimeout(() => card.classList.add('visible'), 100);
       });
     }
 
-    // আজকের ক্লাস ফিল্টার
+    // আজকের ক্লাস ফিল্টার (মিশন সাব-সাবজেক্টগুলো অন্তর্ভুক্ত)
     function filterTodayClasses(classes) {
-      const today = getDateFromTimestamp(new Date().toString());
+      const today = getDateFromTimestamp(new Date().toString()); // Current date as string
       return classes.filter(cls => cls && cls.date === today);
     }
 
@@ -1808,7 +1693,7 @@
       container.innerHTML = tableHTML;
     }
 
-    // সময় অনুযায়ী সাজানো
+    // সময় অনুযায়ী সাজানো (timestampObj ব্যবহার করে)
     function sortByTime(rows, order = 'desc') {
       return rows.slice().sort((a, b) => {
         const timeA = a.timestampObj.getTime();
@@ -1844,7 +1729,7 @@
       });
     }
 
-    // সাবজেক্ট পৃষ্ঠা দেখানো
+    // সাবজেক্ট পৃষ্ঠা দেখানো (মিশন চেক করে)
     function showSubjectPage(subject) {
       if (subject === 'মিশন') {
         showMissionSubPage();
@@ -1868,7 +1753,7 @@
       scrollToTop();
     }
 
-    // সাবজেক্ট ডেটা লোড
+    // সাবজেক্ট ডেটা লোড (মিশন সাব-সাবজেক্ট সাপোর্ট করে)
     function loadSubjectData(subject) {
       const grid = $('#classGrid');
       const searchInput = $('#search');
@@ -1876,13 +1761,14 @@
       grid.innerHTML = '<div class="card"><div class="subject bangla-font">লোড হচ্ছে... <span class="loading"></span></div></div>';
       let rows = allClasses.filter(r => r && r.subject === subject);
       
+      // ডিফল্ট সর্ট: desc (নতুন উপরে)
       let sortedRows = sortByTime(rows, 'desc');
-      renderCards(sortedRows, grid);
+      renderCards(sortedRows, grid);  // এখানে renderCards সর্টেড rows পাবে
       
       searchInput.addEventListener('input', () => {
         const q = searchInput.value.toLowerCase();
         const filtered = rows.filter(r => (r.subject || '').toLowerCase().includes(q) || (r.title || '').toLowerCase().includes(q));
-        const sortedFiltered = sortByTime(filtered, sortSelect.value);
+        const sortedFiltered = sortByTime(filtered, sortSelect.value);  // সর্ট অর্ডার অনুসারে
         renderCards(sortedFiltered, grid);
       });
       sortSelect.addEventListener('change', () => {
@@ -1909,77 +1795,52 @@
       if (searchInput) {
         searchInput.addEventListener('input', () => {
           const q = searchInput.value.trim().toLowerCase();
-          const pills = $all('.pill.subject-link');
-          pills.forEach(pill => {
-            const subject = pill.getAttribute('data-name').toLowerCase();
-            pill.style.display = subject.includes(q) ? '' : 'none';
+          $all('.pill').forEach(p => {
+            const name = p.dataset.name.toLowerCase();
+            p.style.display = name.includes(q) ? '' : 'none';
           });
         });
       }
+      $('#mission-stats').addEventListener('click', () => showMissionSubPage());
+      $('#exam-stats').addEventListener('click', () => showSubjectPage('ইক্সাম'));
     }
 
     // প্রাথমিক ডেটা লোড
     async function loadInitialData() {
       try {
-        allClasses = (await fetchData()).map(normalizeRow);
+        const data = await fetchData();
+        allClasses = data.map((row) => normalizeRow(row)).filter(r => r);  // index সরানো
         renderTodayClassesSummary(allClasses);
         setupEventListeners();
-        const fadeIns = $all('.fade-in');
-        fadeIns.forEach((el, idx) => {
-          setTimeout(() => el.classList.add('visible'), idx * 100);
-        });
       } catch (error) {
-        console.error('Initial data load error:', error);
-        showNotification("প্রাথমিক ডেটা লোড করতে সমস্যা হয়েছে।", 'error');
+        showNotification("ডেটা লোড করতে সমস্যা হয়েছে", true);
       }
     }
 
-    // রিফ্রেশ ডেটা ফাংশন
-    async function refreshData() {
-      const refreshBtn = $('.refresh-btn');
-      refreshBtn.classList.add('loading');
-      try {
-        allClasses = (await fetchData()).map(normalizeRow);
-        renderTodayClassesSummary(allClasses);
-        if (currentSubject) {
-          loadSubjectData(currentSubject);
-        }
-        showNotification("ডেটা সফলভাবে রিফ্রেশ করা হয়েছে!", 'success');
-      } catch (error) {
-        console.error('Data refresh error:', error);
-        showNotification("ডেটা রিফ্রেশ করতে সমস্যা: " + error.message, 'error');
-      } finally {
-        refreshBtn.classList.remove('loading');
-      }
-    }
-
-    // লগইন স্ট্যাটাস চেক করা
-    window.addEventListener('load', () => {
-      if (checkLoginExpiry()) {
+    // পেজ লোড হলে ইনিশিয়ালাইজেশন
+    document.addEventListener('DOMContentLoaded', () => {
+      const isLoggedIn = checkLoginExpiry();
+      if (isLoggedIn) {
         loginPage.style.display = 'none';
         mainPage.style.display = 'block';
         loadInitialData();
       } else {
         loginPage.style.display = 'flex';
         mainPage.style.display = 'none';
+        subjectPage.style.display = 'none';
+        missionSubjectsPage.style.display = 'none';
+        localStorage.removeItem(LOGIN_EXPIRY_KEY);
+        localStorage.removeItem(IS_LOGGED_IN_KEY);
       }
+      scrollToTop();
+      
+      // Fade in animation for elements
+      setTimeout(() => {
+        document.querySelectorAll('.fade-in').forEach(el => {
+          el.classList.add('visible');
+        });
+      }, 100);
     });
-
-    // স্বয়ংক্রিয় লগআউট টাইমার
-    function startLogoutTimer() {
-      const expiryTime = localStorage.getItem(LOGIN_EXPIRY_KEY);
-      if (expiryTime) {
-        const timeLeft = parseInt(expiryTime) - new Date().getTime();
-        if (timeLeft > 0) {
-          setTimeout(logout, timeLeft);
-        } else {
-          logout();
-        }
-      }
-    }
-
-    // পেজ লোডে লগআউট টাইমার শুরু
-    window.addEventListener('load', startLogoutTimer);
   </script>
-</body>
+  </body>
 </html>
