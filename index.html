@@ -42,23 +42,23 @@
     }
 
     /* স্ক্রলিং মসৃণ করার জন্য */
-html {
-  scroll-behavior: smooth; /* স্ক্রল মসৃণ করবে */
-  -webkit-overflow-scrolling: touch; /* মোবাইলে স্মুথ স্ক্রল */
-}
+    html {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
 
-body, header, .card, .hero, .pill, .stat-card {
-  will-change: transform; /* ব্রাউজারকে দ্রুত রেন্ডার করতে বলে */
-  transform: translateZ(0); /* হার্ডওয়্যার ত্বরণ (GPU) ব্যবহার করে */
-}
+    body, header, .card, .hero, .pill, .stat-card {
+      will-change: transform;
+      transform: translateZ(0);
+    }
 
-header, .card, .hero, .login-container, .modal-content {
-  backdrop-filter: blur(8px); /* ব্লার কমিয়ে স্ক্রল দ্রুত করা */
-}
+    header, .card, .hero, .login-container, .modal-content {
+      backdrop-filter: blur(8px);
+    }
 
-.card, .btn, .pill, .stat-card {
-  transition: transform 0.2s, box-shadow 0.2s; /* অ্যানিমেশন সিম্পল করা */
-}
+    .card, .btn, .pill, .stat-card {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
     /* =========================
     BASE STYLES - ENHANCED
@@ -858,88 +858,87 @@ header, .card, .hero, .login-container, .modal-content {
     }
 
     /* =========================
-WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
-========================= */
-.warning-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  z-index: 2000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-  backdrop-filter: blur(10px);
-}
+    WARNING MODAL - FLOATING POPUP CENTER
+    ========================= */
+    .warning-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      backdrop-filter: blur(10px);
+    }
 
-.warning-modal.show {
-  opacity: 1;
-  visibility: visible;
-}
+    .warning-modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
 
-.modal-content {
-  background: var(--card-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  padding: 35px;
-  max-width: 500px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  /* No extra padding or margin - pure center floating */
-}
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 35px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
 
-.modal-content::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
-  transform: rotate(30deg);
-  pointer-events: none;
-}
+    .modal-content::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+      transform: rotate(30deg);
+      pointer-events: none;
+    }
 
-.modal-header h2 {
-  font-size: 1.6rem;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 15px;
-  font-weight: 800;
-}
+    .modal-header h2 {
+      font-size: 1.6rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
 
-.modal-body p {
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 18px;
-}
+    .modal-body p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
 
-.modal-footer .modal-ok-btn {
-  padding: 14px 35px;
-  border-radius: 12px;
-  border: none;
-  background: var(--gradient-primary);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: var(--shadow-md);
-}
+    .modal-footer .modal-ok-btn {
+      padding: 14px 35px;
+      border-radius: 12px;
+      border: none;
+      background: var(--gradient-primary);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-md);
+    }
 
-.modal-ok-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+    .modal-ok-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
     }
 
     /* =========================
@@ -954,7 +953,7 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       border: 1px solid var(--glass-border);
       border-radius: 12px;
       box-shadow: var(--shadow-lg);
-      z-index: 1001; /* Updated: Increased z-index to ensure it's above header */
+      z-index: 1001;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.3s, transform 0.3s;
@@ -983,11 +982,10 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       border-left: 5px solid var(--warning);
     }
 
-    /* Mobile-friendly notification adjustments */
     @media (max-width: 768px) {
       .notification {
-        top: 80px; /* Updated: Position at top below header to avoid bottom navigation bars */
-        bottom: auto; /* Updated: Remove bottom positioning */
+        top: 80px;
+        bottom: auto;
         left: 10px;
         right: 10px;
         max-width: none;
@@ -1097,8 +1095,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
     /* =========================
     CUSTOM STYLES FOR CORRECTIONS
     ========================= */
-    
-    /* সর্ট অপশনের জন্য সাদা কালার */
     #sort {
       background: var(--glass);
       color: var(--text);
@@ -1108,20 +1104,18 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       font-size: 0.9rem;
       backdrop-filter: blur(10px);
     }
-    
+
     #sort option {
       background: var(--card-bg);
       color: var(--text);
     }
-    
-    /* ছোট ঘড়ির আইকন */
+
     .empty-state .fas.fa-clock {
       font-size: 2rem;
       color: var(--text-muted);
       margin-bottom: 15px;
     }
-    
-    /* ফিল্টার বার স্টাইল */
+
     .filter-bar {
       display: flex;
       flex-direction: column;
@@ -1181,7 +1175,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.3), var(--shadow-sm);
     }
 
-    /* ব্যাক বোতামের স্টাইল */
     .back-button {
       padding: 10px 20px;
       border-radius: 12px;
@@ -1200,18 +1193,17 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       box-shadow: var(--shadow-md);
     }
 
-    /* ক্লাস কার্ডের পারফেক্ট সাইজ */
     #classGrid .card {
-      min-height: 220px; /* Changed: Increased min-height for taller cards */
-      height: auto; /* Changed: Allow dynamic height to fit content */
+      min-height: 220px;
+      height: auto;
       max-width: 300px;
       width: 300px;
       margin: 0 auto;
-      padding: 25px; /* Changed: Increased padding for better spacing */
+      padding: 25px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 12px; /* Changed: Slightly increased gap for better content spacing */
+      gap: 12px;
     }
 
     #classGrid .card .subject {
@@ -1241,7 +1233,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       border: 1px solid var(--glass-border);
     }
 
-    /* New: Style for class title in cards */
     #classGrid .card .class-title {
       font-size: 0.95rem;
       color: var(--text);
@@ -1253,7 +1244,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       gap: 8px;
     }
 
-    /* New: Style for refresh button */
     .refresh-btn {
       display: inline-flex;
       align-items: center;
@@ -1261,7 +1251,7 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       padding: 12px 20px;
       border-radius: 12px;
       border: none;
-      background: var(--gradient-primary); /* Updated: Changed to primary gradient for theme consistency */
+      background: var(--gradient-primary);
       color: white;
       font-weight: 600;
       transition: var(--transition);
@@ -1276,6 +1266,45 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
     .refresh-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    .add-class-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: none;
+      background: var(--gradient-primary);
+      color: white;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .add-class-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .button-group {
+        flex-direction: column;
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -1320,10 +1349,15 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       </nav>
     </header>
     <main class="container">
-      <!-- New: Data Refresh Button -->
-      <button class="refresh-btn bangla-font" onclick="refreshData()">
-        <i class="fas fa-sync-alt"></i> ডাটা রিফ্রেশ করুন
-      </button>
+      <!-- New: Button group for Refresh and Add Class buttons -->
+      <div class="button-group">
+        <button class="refresh-btn bangla-font" id="refresh-btn" onclick="refreshData()">
+          <i class="fas fa-sync-alt"></i> <span id="refresh-btn-text">ডাটা রিফ্রেশ করুন</span>
+        </button>
+        <a class="add-class-btn bangla-font" id="add-class-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeBjBhyRPk0tb5GTLXIxsZZxwSoP12npKInobGYBN4TTafXkg/viewform?usp=header" target="_blank" style="display: none;">
+          <i class="fas fa-plus-circle"></i> ক্লাস যুক্ত করুন
+        </a>
+      </div>
       <!-- হিরো সেকশন -->
       <div class="hero fade-in">
         <h1 class="bangla-font">ALIM-25 BOM Admission Course 1.0</h1>
@@ -1421,10 +1455,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       </nav>
     </header>
     <main class="container">
-      <!-- New: Data Refresh Button in Subject Page -->
-      <button class="refresh-btn bangla-font" onclick="refreshData()">
-        <i class="fas fa-sync-alt"></i> ডাটা রিফ্রেশ করুন
-      </button>
       <h2 id="subject-title" class="bangla-font"><i class="fas fa-book"></i> সাবজেক্ট</h2>
       <div id="classGrid" class="grid"></div>
     </main>
@@ -1453,10 +1483,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       </nav>
     </header>
     <main class="container">
-      <!-- New: Data Refresh Button in Mission Page -->
-      <button class="refresh-btn bangla-font" onclick="refreshData()">
-        <i class="fas fa-sync-alt"></i> ডাটা রিফ্রেশ করুন
-      </button>
       <h2 id="mission-title" class="bangla-font"><i class="fas fa-bullseye"></i> মিশন</h2>
       <div class="subj-list" id="mission-subjects-list">
         <!-- JS দিয়ে রেন্ডার হবে -->
@@ -1523,6 +1549,7 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
     // localStorage keys
     const LOGIN_EXPIRY_KEY = 'alim25_login_expiry';
     const IS_LOGGED_IN_KEY = 'alim25_is_logged_in';
+    const USER_ROLE_KEY = 'alim25_user_role'; // New: To store user role (owner or user)
 
     // পেজ উপরে স্ক্রল করার ফাংশন
     function scrollToTop() {
@@ -1546,10 +1573,16 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       return now < parseInt(expiryTime);
     }
 
+    // ব্যবহারকারীর রোল চেক করা (owner or user)
+    function isOwner() {
+      return localStorage.getItem(USER_ROLE_KEY) === 'owner';
+    }
+
     // লগআউট করা
     function logout() {
       localStorage.removeItem(LOGIN_EXPIRY_KEY);
       localStorage.removeItem(IS_LOGGED_IN_KEY);
+      localStorage.removeItem(USER_ROLE_KEY); // New: Remove user role
       loginPage.style.display = 'flex';
       mainPage.style.display = 'none';
       subjectPage.style.display = 'none';
@@ -1579,10 +1612,14 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
     function checkPassword() {
       const password = $('#password').value;
       const errorElement = $('#error-message');
-      if (password === 'USERALIM25') {
+      if (password === 'USERALIM25' || password === 'OWNERALIM25') {
         loginPage.style.display = 'none';
         mainPage.style.display = 'block';
         setLoginExpiry();
+        localStorage.setItem(USER_ROLE_KEY, password === 'OWNERALIM25' ? 'owner' : 'user'); // New: Set user role
+        if (isOwner()) {
+          $('#add-class-btn').style.display = 'inline-flex'; // Show Add Class button for owner
+        }
         showWarningModal();
         loadInitialData();
         scrollToTop();
@@ -1600,7 +1637,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
     // Timestamp থেকে তারিখ এবং সময় এক্সট্র্যাক্ট করার ফাংশন
     function parseTimestamp(timestampStr) {
       try {
-        // Parse the timestamp string to Date object
         const date = new Date(timestampStr);
         if (isNaN(date.getTime())) {
           throw new Error('Invalid date');
@@ -1642,7 +1678,7 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       return availableSubjects.includes(subjectFromSheet) ? subjectFromSheet : subjectFromSheet;
     }
 
-    // ডেটা ফেচ করা (প্লেসহোল্ডার API URL, কাস্টমাইজেশন প্রয়োজন)
+    // ডেটা ফেচ করা
     async function fetchData() {
       showNotification("ডেটা লোড হচ্ছে...", false);
       try {
@@ -1659,40 +1695,34 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       }
     }
 
-    // ডেটা নরমালাইজ (এখন timestamp থেকে সঠিক তারিখ/সময় নেয়, serial সরানো)
+    // ডেটা নরমালাইজ
     function normalizeRow(row) {
       return {
         subject: findBestMatchingSubject(row.subject || 'Unknown'),
         link: row.link || '#',
-        title: row.title || 'ক্লাস', // Ensure title is always present
+        title: row.title || 'ক্লাস',
         date: getDateFromTimestamp(row.timestamp),
         time: getTimeFromTimestamp(row.timestamp),
-        timestampObj: parseTimestamp(row.timestamp), // Store parsed Date for sorting
-        // serial সরানো: পরে সাবজেক্ট অনুযায়ী হ্যান্ডেল করা হবে
+        timestampObj: parseTimestamp(row.timestamp),
       };
     }
 
-    // কার্ড রেন্ডার (প্রত্যেক সাবজেক্টের জন্য আলাদা সিরিয়াল)
+    // কার্ড রেন্ডার
     function renderCards(rows, root) {
       if (!rows || rows.length === 0) {
         root.innerHTML = '<div class="empty-state" style="text-align: center; padding: 40px;"><i class="fas fa-clock" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 15px;"></i><p class="bangla-font">কোন ক্লাস পাওয়া যায়নি</p></div>';
         return;
       }
-      
-      // প্রথমে rows কে timestamp অনুযায়ী desc সর্ট করুন (নতুন উপরে)
+
       rows = sortByTime(rows, 'desc');
-      
-      // এখন সিরিয়াল অ্যাসাইন করুন: 1 থেকে শুরু (নতুন ক্লাস 1, পুরাতন শেষে)
       rows.forEach((r, idx) => {
-        r.serial = idx + 1;  // সাবজেক্ট-স্পেসিফিক সিরিয়াল
+        r.serial = idx + 1;
       });
-      
+
       root.innerHTML = '';
       rows.forEach(r => {
         const card = document.createElement('div');
         card.className = 'card fade-in';
-        
-        // ফোল্ডার অনুযায়ী বাটন টেক্সট সেট করা
         let buttonText = 'ক্লাস দেখুন';
         if (r.subject === 'ইক্সাম') {
           buttonText = 'পরীক্ষায় অংশগ্রহণ করুন';
@@ -1701,8 +1731,6 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
         } else if (['রেজাল্ট', 'উত্তরপত্র ও শীট', 'অন্যান্য'].includes(r.subject)) {
           buttonText = 'দেখুন';
         }
-        
-        // Changed: Added class-title div to display the title
         card.innerHTML = `
           <span class="card-badge">#${r.serial}</span>
           <div class="subject"><i class="fas fa-book"></i> <span class="bangla-font">${r.subject}</span></div>
@@ -1711,14 +1739,13 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
           <a class="btn" href="${r.link}" target="_blank"><i class="fas fa-play-circle"></i> <span class="bangla-font">${buttonText}</span></a>
         `;
         root.appendChild(card);
-        // Ensure card is visible by adding 'visible' class after appending
         setTimeout(() => card.classList.add('visible'), 100);
       });
     }
 
-    // আজকের ক্লাস ফিল্টার (মিশন সাব-সাবজেক্টগুলো অন্তর্ভুক্ত)
+    // আজকের ক্লাস ফিল্টার
     function filterTodayClasses(classes) {
-      const today = getDateFromTimestamp(new Date().toString()); // Current date as string
+      const today = getDateFromTimestamp(new Date().toString());
       return classes.filter(cls => cls && cls.date === today);
     }
 
@@ -1730,186 +1757,212 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
         container.innerHTML = `<tr><td colspan="3" class="bangla-font" style="text-align: center; padding: 20px;">আজকের জন্য কোন ক্লাস পাওয়া যায়নি</td></tr>`;
         return;
       }
-      let tableHTML = '';
+
+      container.innerHTML = '';
       todayClasses.forEach(cls => {
-        tableHTML += `
-          <tr>
-            <td><span class="subject-badge bangla-font">${cls.subject}</span></td>
-            <td class="class-info bangla-font">${cls.title}</td>
-            <td class="bangla-font">${cls.time}</td>
-          </tr>
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><span class="subject-badge bangla-font">${cls.subject}</span></td>
+          <td class="class-info bangla-font">${cls.title}</td>
+          <td class="bangla-font">${cls.time}</td>
         `;
+        container.appendChild(row);
       });
-      container.innerHTML = tableHTML;
     }
 
-    // সময় অনুযায়ী সাজানো (timestampObj ব্যবহার করে)
-    function sortByTime(rows, order = 'desc') {
-      return rows.slice().sort((a, b) => {
+    // সময় অনুযায়ী সর্ট
+    function sortByTime(classes, order = 'desc') {
+      return classes.sort((a, b) => {
         const timeA = a.timestampObj.getTime();
         const timeB = b.timestampObj.getTime();
-        return order === 'asc' ? timeA - timeB : timeB - timeA;
+        return order === 'desc' ? timeB - timeA : timeA - timeB;
       });
     }
 
-    // মিশন সাব-সাবজেক্ট পেজ দেখানো
-    function showMissionSubPage() {
-      $('#mission-title').innerHTML = `<i class="fas fa-bullseye"></i> <span class="bangla-font">মিশন</span>`;
-      mainPage.style.display = 'none';
-      missionSubjectsPage.style.display = 'block';
-      scrollToTop();
-      renderMissionSubList();
+    // ডেটা রিফ্রেশ ফাংশন
+    async function refreshData() {
+      const refreshBtnText = $('#refresh-btn-text');
+      refreshBtnText.textContent = 'ডাটা রিফ্রেশ হচ্ছে...';
+      try {
+        const data = await fetchData();
+        allClasses = data.map(normalizeRow);
+        showNotification("ডেটা সফলভাবে রিফ্রেশ হয়েছে!", false);
+        renderTodayClassesSummary(allClasses);
+        if (currentSubject) {
+          const filteredClasses = allClasses.filter(cls => cls.subject === currentSubject);
+          renderCards(filteredClasses, $('#classGrid'));
+        }
+        if (mainPage.style.display === 'block') {
+          renderTodayClassesSummary(allClasses);
+        }
+        if (missionSubjectsPage.style.display === 'block') {
+          renderMissionSubjects();
+        }
+      } catch (error) {
+        showNotification("ডেটা রিফ্রেশ করা যায়নি: " + error.message, true);
+      } finally {
+        refreshBtnText.textContent = 'ডাটা রিফ্রেশ করুন';
+      }
     }
 
-    // মিশন সাব-লিস্ট রেন্ডার
-    function renderMissionSubList() {
+    // মিশন সাব-সাবজেক্ট রেন্ডার
+    function renderMissionSubjects() {
       const container = $('#mission-subjects-list');
       container.innerHTML = '';
-      missionSubSubjects.forEach(subSubject => {
+      missionSubSubjects.forEach(subject => {
         const pill = document.createElement('a');
         pill.className = 'pill subject-link';
         pill.href = '#';
-        pill.setAttribute('data-name', subSubject);
-        pill.innerHTML = `<span><i class="fas fa-bullseye"></i> <span class="bangla-font">${subSubject}</span></span><span class="go bangla-font">খুলুন</span>`;
+        pill.dataset.name = subject;
+        pill.innerHTML = `
+          <span><i class="fas fa-bullseye"></i> <span class="bangla-font">${subject}</span></span>
+          <span class="go bangla-font">খুলুন</span>
+        `;
         pill.addEventListener('click', (e) => {
           e.preventDefault();
-          showSubjectPage(subSubject);
+          currentSubject = subject;
+          showSubjectPage(subject);
         });
         container.appendChild(pill);
       });
     }
 
-    // সাবজেক্ট পৃষ্ঠা দেখানো (মিশন চেক করে)
+    // সাবজেক্ট পেজ দেখানো
     function showSubjectPage(subject) {
-      if (subject === 'মিশন') {
-        showMissionSubPage();
-        return;
-      }
-      currentSubject = subject;
-      $('#subject-title').innerHTML = `<i class="fas fa-book"></i> <span class="bangla-font">${subject}</span>`;
       mainPage.style.display = 'none';
       missionSubjectsPage.style.display = 'none';
       subjectPage.style.display = 'block';
+      $('#subject-title').innerHTML = `<i class="fas fa-book"></i> <span class="bangla-font">${subject}</span>`;
+      const filteredClasses = allClasses.filter(cls => cls.subject === subject);
+      renderCards(filteredClasses, $('#classGrid'));
       scrollToTop();
-      loadSubjectData(subject);
     }
 
-    // মেইন পৃষ্ঠায় ফিরে যাওয়া
+    // মেইন পেজ দেখানো
     function showMainPage() {
       subjectPage.style.display = 'none';
       missionSubjectsPage.style.display = 'none';
       mainPage.style.display = 'block';
       currentSubject = null;
+      renderTodayClassesSummary(allClasses);
       scrollToTop();
     }
 
-    // সাবজেক্ট ডেটা লোড (মিশন সাব-সাবজেক্ট সাপোর্ট করে)
-    function loadSubjectData(subject) {
-      const grid = $('#classGrid');
-      const searchInput = $('#search');
-      const sortSelect = $('#sort');
-      grid.innerHTML = '<div class="card"><div class="subject bangla-font">লোড হচ্ছে... <span class="loading"></span></div></div>';
-      let rows = allClasses.filter(r => r && r.subject === subject);
-      
-      // ডিফল্ট সর্ট: desc (নতুন উপরে)
-      let sortedRows = sortByTime(rows, 'desc');
-      renderCards(sortedRows, grid);  // এখানে renderCards সর্টেড rows পাবে
-      
+    // মিশন সাব-সাবজেক্ট পেজ দেখানো
+    function showMissionSubjectsPage() {
+      mainPage.style.display = 'none';
+      subjectPage.style.display = 'none';
+      missionSubjectsPage.style.display = 'block';
+      $('#mission-title').innerHTML = `<i class="fas fa-bullseye"></i> <span class="bangla-font">মিশন</span>`;
+      renderMissionSubjects();
+      scrollToTop();
+    }
+
+    // ইনিশিয়াল ডেটা লোড
+    async function loadInitialData() {
+      if (checkLoginExpiry()) {
+        loginPage.style.display = 'none';
+        mainPage.style.display = 'block';
+        if (isOwner()) {
+          $('#add-class-btn').style.display = 'inline-flex'; // Show Add Class button for owner
+        }
+        const data = await fetchData();
+        allClasses = data.map(normalizeRow);
+        renderTodayClassesSummary(allClasses);
+      } else {
+        logout();
+      }
+    }
+
+    // সার্চ ফাংশনালিটি
+    function setupSearch() {
+      const searchInput = $('#search-subjects');
+      const subjectLinks = $all('.subject-link', mainPage);
       searchInput.addEventListener('input', () => {
-        const q = searchInput.value.toLowerCase();
-        const filtered = rows.filter(r => (r.subject || '').toLowerCase().includes(q) || (r.title || '').toLowerCase().includes(q));
-        const sortedFiltered = sortByTime(filtered, sortSelect.value);  // সর্ট অর্ডার অনুসারে
-        renderCards(sortedFiltered, grid);
+        const query = searchInput.value.toLowerCase();
+        subjectLinks.forEach(link => {
+          const subject = link.dataset.name.toLowerCase();
+          link.style.display = subject.includes(query) ? 'flex' : 'none';
+        });
       });
-      sortSelect.addEventListener('change', () => {
-        const order = sortSelect.value;
-        const sorted = sortByTime(rows, order);
-        renderCards(sorted, grid);
+
+      const subjectSearch = $('#search', subjectPage);
+      subjectSearch.addEventListener('input', () => {
+        const query = subjectSearch.value.toLowerCase();
+        const filteredClasses = allClasses.filter(cls => 
+          cls.subject === currentSubject && 
+          (cls.title.toLowerCase().includes(query) || cls.subject.toLowerCase().includes(query))
+        );
+        renderCards(filteredClasses, $('#classGrid'));
       });
     }
 
-    // ইভেন্ট লিসেনার সেটআপ
-    function setupEventListeners() {
+    // সর্ট ফাংশনালিটি
+    function setupSort() {
+      const sortSelect = $('#sort');
+      sortSelect.addEventListener('change', () => {
+        const order = sortSelect.value;
+        const filteredClasses = allClasses.filter(cls => cls.subject === currentSubject);
+        renderCards(filteredClasses, $('#classGrid'));
+      });
+    }
+
+    // সাবজেক্ট লিঙ্কের জন্য ইভেন্ট লিসেনার
+    function setupSubjectLinks() {
       $all('.subject-link').forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
-          const subject = link.getAttribute('data-name');
-          showSubjectPage(subject);
+          const subject = link.dataset.name;
+          if (subject === 'মিশন') {
+            showMissionSubjectsPage();
+          } else {
+            currentSubject = subject;
+            showSubjectPage(subject);
+          }
         });
       });
-      $('.back-button').addEventListener('click', (e) => {
-        e.preventDefault();
-        showMainPage();
-      });
-      const searchInput = $('#search-subjects');
-      if (searchInput) {
-        searchInput.addEventListener('input', () => {
-          const q = searchInput.value.trim().toLowerCase();
-          $all('.pill').forEach(p => {
-            const name = p.dataset.name.toLowerCase();
-            p.style.display = name.includes(q) ? '' : 'none';
-          });
+    }
+
+    // ব্যাক বাটনের জন্য ইভেন্ট লিসেনার
+    function setupBackButton() {
+      $all('.back-button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          showMainPage();
         });
-      }
-      $('#mission-stats').addEventListener('click', () => showMissionSubPage());
-      $('#exam-stats').addEventListener('click', () => showSubjectPage('ইক্সাম'));
+      });
     }
 
-    // প্রাথমিক ডেটা লোড
-    async function loadInitialData() {
-      try {
-        const data = await fetchData();
-        allClasses = data.map((row) => normalizeRow(row)).filter(r => r);  // index সরানো
-        renderTodayClassesSummary(allClasses);
-        setupEventListeners();
-      } catch (error) {
-        showNotification("ডেটা লোড করতে সমস্যা হয়েছে", true);
-      }
-    }
-
-    // New: Refresh Data Function
-    async function refreshData() {
-      showNotification("ডেটা লোড হচ্ছে...", false);
-      try {
-        const data = await fetchData();
-        allClasses = data.map((row) => normalizeRow(row)).filter(r => r);
-        renderTodayClassesSummary(allClasses);
-        if (currentSubject) {
-          loadSubjectData(currentSubject);
-        }
-        if (missionSubjectsPage.style.display === 'block') {
-          renderMissionSubList();
-        }
-        showNotification("ডেটা সফলভাবে রিফ্রেশ হয়েছে!", false);
-      } catch (error) {
-        showNotification("ডেটা রিফ্রেশ করতে সমস্যা হয়েছে", true);
-      }
-    }
-
-    // পেজ লোড হলে ইনিশিয়ালাইজেশন
-    document.addEventListener('DOMContentLoaded', () => {
-      const isLoggedIn = checkLoginExpiry();
-      if (isLoggedIn) {
+    // ইনিশিয়ালাইজেশন
+    function init() {
+      if (checkLoginExpiry()) {
         loginPage.style.display = 'none';
         mainPage.style.display = 'block';
+        if (isOwner()) {
+          $('#add-class-btn').style.display = 'inline-flex'; // Show Add Class button for owner
+        }
         loadInitialData();
-      } else {
-        loginPage.style.display = 'flex';
-        mainPage.style.display = 'none';
-        subjectPage.style.display = 'none';
-        missionSubjectsPage.style.display = 'none';
-        localStorage.removeItem(LOGIN_EXPIRY_KEY);
-        localStorage.removeItem(IS_LOGGED_IN_KEY);
       }
-      scrollToTop();
-      
-      // Fade in animation for elements
-      setTimeout(() => {
-        document.querySelectorAll('.fade-in').forEach(el => {
-          el.classList.add('visible');
+      setupSearch();
+      setupSort();
+      setupSubjectLinks();
+      setupBackButton();
+
+      // ফেড-ইন অ্যানিমেশন
+      const fadeInElements = $all('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
         });
-      }, 100);
-    });
+      }, { threshold: 0.1 });
+      fadeInElements.forEach(el => observer.observe(el));
+    }
+
+    // ডকুমেন্ট লোড হলে ইনিশিয়ালাইজ
+    document.addEventListener('DOMContentLoaded', init);
   </script>
-  </body>
+</body>
 </html>
