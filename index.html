@@ -954,7 +954,7 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       border: 1px solid var(--glass-border);
       border-radius: 12px;
       box-shadow: var(--shadow-lg);
-      z-index: 1000;
+      z-index: 1001; /* Updated: Increased z-index to ensure it's above header */
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.3s, transform 0.3s;
@@ -981,6 +981,19 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
 
     .notification.warning {
       border-left: 5px solid var(--warning);
+    }
+
+    /* Mobile-friendly notification adjustments */
+    @media (max-width: 768px) {
+      .notification {
+        top: 80px; /* Updated: Position at top below header to avoid bottom navigation bars */
+        bottom: auto; /* Updated: Remove bottom positioning */
+        left: 10px;
+        right: 10px;
+        max-width: none;
+        width: calc(100% - 20px);
+        margin: 0 auto;
+      }
     }
 
     /* =========================
@@ -1239,6 +1252,31 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       align-items: center;
       gap: 8px;
     }
+
+    /* New: Style for refresh button */
+    .refresh-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: none;
+      background: var(--gradient-primary); /* Updated: Changed to primary gradient for theme consistency */
+      color: white;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .refresh-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+    }
   </style>
 </head>
 <body>
@@ -1282,6 +1320,10 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       </nav>
     </header>
     <main class="container">
+      <!-- New: Data Refresh Button -->
+      <button class="refresh-btn bangla-font" onclick="refreshData()">
+        <i class="fas fa-sync-alt"></i> ডাটা রিফ্রেশ করুন
+      </button>
       <!-- হিরো সেকশন -->
       <div class="hero fade-in">
         <h1 class="bangla-font">ALIM-25 BOM Admission Course 1.0</h1>
@@ -1379,6 +1421,10 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       </nav>
     </header>
     <main class="container">
+      <!-- New: Data Refresh Button in Subject Page -->
+      <button class="refresh-btn bangla-font" onclick="refreshData()">
+        <i class="fas fa-sync-alt"></i> ডাটা রিফ্রেশ করুন
+      </button>
       <h2 id="subject-title" class="bangla-font"><i class="fas fa-book"></i> সাবজেক্ট</h2>
       <div id="classGrid" class="grid"></div>
     </main>
@@ -1407,6 +1453,10 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
       </nav>
     </header>
     <main class="container">
+      <!-- New: Data Refresh Button in Mission Page -->
+      <button class="refresh-btn bangla-font" onclick="refreshData()">
+        <i class="fas fa-sync-alt"></i> ডাটা রিফ্রেশ করুন
+      </button>
       <h2 id="mission-title" class="bangla-font"><i class="fas fa-bullseye"></i> মিশন</h2>
       <div class="subj-list" id="mission-subjects-list">
         <!-- JS দিয়ে রেন্ডার হবে -->
@@ -1814,6 +1864,25 @@ WARNING MODAL - FLOATING POPUP CENTER (Ultra Simple)
         setupEventListeners();
       } catch (error) {
         showNotification("ডেটা লোড করতে সমস্যা হয়েছে", true);
+      }
+    }
+
+    // New: Refresh Data Function
+    async function refreshData() {
+      showNotification("ডেটা লোড হচ্ছে...", false);
+      try {
+        const data = await fetchData();
+        allClasses = data.map((row) => normalizeRow(row)).filter(r => r);
+        renderTodayClassesSummary(allClasses);
+        if (currentSubject) {
+          loadSubjectData(currentSubject);
+        }
+        if (missionSubjectsPage.style.display === 'block') {
+          renderMissionSubList();
+        }
+        showNotification("ডেটা সফলভাবে রিফ্রেশ হয়েছে!", false);
+      } catch (error) {
+        showNotification("ডেটা রিফ্রেশ করতে সমস্যা হয়েছে", true);
       }
     }
 
