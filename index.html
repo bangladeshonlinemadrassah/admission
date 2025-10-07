@@ -197,6 +197,58 @@
     }
 
     /* =========================
+    SEARCH RESULTS STYLES - NEW
+    ========================= */
+    #search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      margin-top: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(15px);
+      z-index: 1001;
+      display: none;
+    }
+
+    .search-result-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--glass-border);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .search-result-item:hover {
+      background: rgba(67, 97, 238, 0.1);
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-result-item .title {
+      flex: 1;
+      font-size: 0.9rem;
+    }
+
+    .search-result-item .subject {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--glass);
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+    }
+
+    /* =========================
     HERO SECTION - ENHANCED
     ========================= */
     .hero {
@@ -334,7 +386,7 @@
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow-md);
-      font-size: 0.9rem;
+      font-size: 0.6rem;
       backdrop-filter: blur(15px);
       border: 1px solid var(--glass-border);
     }
@@ -391,13 +443,13 @@
       border-radius: 20px;
       background: var(--gradient-accent);
       color: white;
-      font-size: 0.8rem;
+      font-size: 0.6rem;
       font-weight: 500;
       box-shadow: var(--shadow-sm);
     }
 
     .class-info {
-      font-size: 0.9rem;
+      font-size: 0.6rem;
       color: var(--text);
     }
 
@@ -1579,7 +1631,7 @@
     /* Dashboard Modal - FIXED TO VIEWPORT CENTER */
     .dashboard-modal {
       position: fixed;
-      top: 0;
+      top: 1%;
       left: 0;
       width: 100vw;
       height: 100vh;
@@ -2115,7 +2167,8 @@
         <br>
         <div class="searchbar">
           <i class="fas fa-search"></i>
-          <input id="search-subjects" type="search" placeholder="সাবজেক্ট খুঁজুন...">
+          <input id="search-subjects" type="search" placeholder="সার্চ করুন যা দরকার🔎" class="dynamic-placeholder">
+          <div id="search-results"></div>
         </div>
       </nav>
     </header>
@@ -2979,16 +3032,69 @@
       }
     }
 
+    // =========================
+    // NEW SEARCH FUNCTIONALITY
+    // =========================
+
     // সার্চ ফাংশনালিটি
     function setupSearch() {
       const searchInput = $('#search-subjects');
-      const subjectLinks = $all('.subject-link', mainPage);
+      const resultsContainer = $('#search-results');
+      
       searchInput.addEventListener('input', () => {
-        const query = searchInput.value.toLowerCase();
-        subjectLinks.forEach(link => {
-          const subject = link.dataset.name.toLowerCase();
-          link.style.display = subject.includes(query) ? 'flex' : 'none';
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        
+        if (!searchTerm) {
+          resultsContainer.style.display = 'none';
+          resultsContainer.innerHTML = '';
+          return;
+        }
+        
+        // ফিল্টার এবং সিমিলারিটি ক্যালকুলেশন
+        const filtered = allClasses
+          .map(cls => ({ ...cls, sim: maxWordSimilarity(searchTerm, cls.title) }))
+          .filter(res => res.sim > 0.3)
+          .sort((a, b) => b.sim - a.sim);
+        
+        renderSearchResults(filtered);
+      });
+
+      // সার্চ রেজাল্ট রেন্ডার ফাংশন
+      function renderSearchResults(results) {
+        if (results.length === 0) {
+          resultsContainer.style.display = 'none';
+          resultsContainer.innerHTML = '';
+          return;
+        }
+        
+        resultsContainer.style.display = 'block';
+        resultsContainer.innerHTML = '';
+        
+        results.forEach(res => {
+          const item = document.createElement('div');
+          item.className = 'search-result-item';
+          item.innerHTML = `
+            <span class="title bangla-font">${res.title}</span>
+            <span class="subject bangla-font">${res.subject}</span>
+          `;
+          
+          item.addEventListener('click', () => {
+            highlightedClassTimestamp = res.timestamp;
+            showSubjectPage(res.subject);
+            resultsContainer.innerHTML = '';
+            searchInput.value = '';
+            resultsContainer.style.display = 'none';
+          });
+          
+          resultsContainer.appendChild(item);
         });
+      }
+
+      // সার্চ বারের বাইরে ক্লিক করলে রেজাল্ট বন্ধ হবে
+      document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+          resultsContainer.style.display = 'none';
+        }
       });
 
       const subjectSearch = $('#search', subjectPage);
@@ -3000,6 +3106,76 @@
         );
         renderCards(filteredClasses, $('#classGrid'));
       });
+    }
+
+    // ওয়ার্ড সিমিলারিটি ফাংশন
+    function maxWordSimilarity(searchTerm, title) {
+      const words = title.toLowerCase().split(/\s+/);
+      let maxSim = 0;
+      
+      words.forEach(word => {
+        const sim = similarity(searchTerm, word);
+        if (sim > maxSim) maxSim = sim;
+      });
+      
+      // ফুল টাইটেল চেক
+      const fullSim = similarity(searchTerm, title.toLowerCase());
+      return Math.max(maxSim, fullSim);
+    }
+
+    // লেভেনশটেইন ডিসটেন্স ভিত্তিক সিমিলারিটি
+    function similarity(s1, s2) {
+      s1 = s1.toLowerCase();
+      s2 = s2.toLowerCase();
+      const m = s1.length;
+      const n = s2.length;
+      
+      // ডাইনামিক প্রোগ্রামিং ম্যাট্রিক্স
+      const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+      
+      for (let i = 0; i <= m; i++) dp[i][0] = i;
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+      
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
+          dp[i][j] = Math.min(
+            dp[i - 1][j] + 1,
+            dp[i][j - 1] + 1,
+            dp[i - 1][j - 1] + cost
+          );
+        }
+      }
+      
+      const distance = dp[m][n];
+      const maxLen = Math.max(m, n);
+      return maxLen ? (maxLen - distance) / maxLen : 0;
+    }
+
+    // ডাইনামিক প্লেসহোল্ডার ফাংশন
+    function initDynamicPlaceholder() {
+      const searchInput = $('#search-subjects');
+      const placeholders = [
+        'সার্চ করুন যা দরকার🔍',
+        'কি খুজছেন?🤔',
+        'সাজেশন্স🔥',
+        'জিন্স সাজেশন্স💥',
+        '👉ক্লাস',
+        '💡মিশন',
+        '👉ইক্সাম',
+        'শীট🗞',
+        ];
+      
+      let currentIndex = 0;
+      
+      function updatePlaceholder() {
+        searchInput.placeholder = placeholders[currentIndex];
+        currentIndex = (currentIndex + 1) % placeholders.length;
+      }
+      
+      // প্রতি ৪ সেকেন্ডে প্লেসহোল্ডার চেঞ্জ
+      setInterval(updatePlaceholder, 4000);
+      updatePlaceholder(); // ইনিশিয়ালাইজ
     }
 
     // সর্ট ফাংশনালিটি
@@ -3617,6 +3793,7 @@
       setupBackButton();
       setupSortClasses();
       setupNewFeatures();
+      initDynamicPlaceholder();
 
       // ফেড-ইন অ্যানিমেশন
       const fadeInElements = $all('.fade-in');
